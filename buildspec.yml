@@ -3,7 +3,7 @@ version: 0.2
 phases:
   pre_build:
     commands:
-    - ${aws ecr get-login --no-include-email --region us-east-1}
+    - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 001273462887.dkr.ecr.us-east-1.amazonaws.com
     - REPOSITORY_URI=001273462887.dkr.ecr.us-east-1.amazonaws.com/my-repository
     - IMAGE_NAME=$REPOSITORY_URI/analytics-app
   build:
