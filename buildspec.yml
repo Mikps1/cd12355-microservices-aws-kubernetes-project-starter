@@ -9,7 +9,7 @@ phases:
   build:
     commands:
     - cd analytics
-    - docker build -t $IMAGE_NAME:latest
+    - docker build -t $IMAGE_NAME:latest .
     - docker tag $IMAGE_NAME:latest $IMAGE_NAME:$CODEBUILD_BUILD_NUMBER
     - echo "DONE?"
   post_build:
