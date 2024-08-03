@@ -5,14 +5,13 @@ phases:
     commands:
     - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 001273462887.dkr.ecr.us-east-1.amazonaws.com
     - REPOSITORY_URI=001273462887.dkr.ecr.us-east-1.amazonaws.com/my-repository
-    - IMAGE_NAME=$REPOSITORY_URI/analytics-app
   build:
     commands:
     - cd analytics
-    - docker build -t $IMAGE_NAME:latest .
-    - docker tag $IMAGE_NAME:latest $IMAGE_NAME:$CODEBUILD_BUILD_NUMBER
+    - docker build -t $REPOSITORY_URI:latest .
+    - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$CODEBUILD_BUILD_NUMBER
     - echo "DONE?"
   post_build:
     commands:
-    - docker push $IMAGE_NAME:latest
-    - docker push $IMAG_NAME:$CODEBUILD_BUILD_NUMBER
+    - docker push $REPOSITORY_URI:latest
+    - docker push $REPOSITORY_URI:$CODEBUILD_BUILD_NUMBER
