@@ -33,7 +33,6 @@ spec:
       - name: coworking
         # Locally hosted docker image
         image: 001273462887.dkr.ecr.us-east-1.amazonaws.com/my-repository:latest
-        imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
             path: /health_check

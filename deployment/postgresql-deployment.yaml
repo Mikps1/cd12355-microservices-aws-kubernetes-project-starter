@@ -17,20 +17,21 @@ spec:
         env:
         - name: POSTGRES_DB
           valueFrom:
-            configMapKeyRef: DB_NAME
+            configMapKeyRef:
+              name: my-configmap
+              key: DB_NAME
         - name: POSTGRES_USER
           valueFrom:
-            configMapKeyRef: DB_USER
+            configMapKeyRef:
+              name: my-configmap
+              key: DB_USERNAME
         - name: POSTGRES_PASSWORD
-          value:
-            valueFrom:
-              secretKeyRef:
-                name: DB_PASSWORD
-                key: password
+          valueFrom:
+            secretKeyRef:
+              name: db-password
+              key: password
         ports:
-        - containerPort:
-            valueFrom:
-              configMapKeyRef: DB_PORT
+        - containerPort: 5432
         volumeMounts:
         - mountPath: /var/lib/postgresql/data
           name: postgresql-storage
